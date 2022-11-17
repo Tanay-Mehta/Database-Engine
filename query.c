@@ -7,9 +7,48 @@
 //find row BT
 
 //read full file//
-// string find_item_BT(string tablename_data){
+node* sortedArrayToBST(list order, int start, int end)
+{
+    int mid = 0;
+    if((start + end-1)%2 == 0){
+    mid = ((start + end-1)/2);
+    }
+    else{
+        mid = ((start+end)/2);
+    }
+    node *head = newnode(order[mid].id, order[mid].dish);
     
-// }
+    head->left =  sortedArrayToBST(order, start, mid-1);
+    head->right = sortedArrayToBST(order, mid+1, end);
+    return head;
+}
+int find_item_BT(string tablename_data, int id){
+    list order; 
+    char data[100];
+    FILE* ptr = fopen(tablename_data, "r");
+    int i;
+    fgets(data, 100, ptr);
+    for(i=0;i<5;i++){
+        fgets(data, 2, ptr);
+        order[i].id = atoi(data);
+        fgets(data, 2, ptr);
+        fgets(data, 100, ptr);
+        order[i].dish = atoi(data);
+    }
+    node *root = sortedArrayToBST(order, 0, 5);
+    node *temp = root;
+    while(temp->id != id){
+        if(id < temp->id){
+            temp = temp->left;
+        }
+        else{
+            temp = temp->right;
+        }
+    }
+    return temp->id;
+    
+    
+}
 string find_row(string tablename, int no){
     int i;
     FILE* pFile;

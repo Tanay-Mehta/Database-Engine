@@ -12,7 +12,12 @@
 //delete row//
 
 //generate id//
-
+node *newnode(int id1,int dish1){
+    node *newnode1;
+    newnode1->id = id1;
+    newnode1->dish = dish1;
+    return newnode1;
+}
 int insert(int item, string tablenamedata, string tablenameid){
     int id = generate_id(tablenameid);
     FILE *fpt = fopen(tablenamedata, "a");
