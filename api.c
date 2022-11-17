@@ -3,15 +3,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-//insert row //
-//1//
-//2
-//3
-//create table//
-
-//delete row//
-
-//generate id//
 node *newnode(int id1,int dish1){
     node *newnode1;
     newnode1->id = id1;
@@ -44,7 +35,6 @@ int create_table(string tablename_data, string tablename_tables, string use_tabl
     }
     return 0;
 }
-
 int generate_id(string tablename){
     FILE *ptr = fopen(tablename, "r");
     int no = 0;
@@ -56,18 +46,12 @@ int generate_id(string tablename){
     fclose(fptr);
     return(no);
 }
-
 void delete_line(int id, string filepath_data, string filepath_new_file){
-    
     FILE* file, *temp;
     file = fopen(filepath_data, "r");
     temp = fopen(filepath_new_file, "w");
-    
     char buffer[100];
     int delete_line = find(id, filepath_data);
-    // if(delete_line == -1){
-    //     return 1;
-    // }
     delete_line = delete_line + 2;
     bool keep_reading = true;
     int current_line = 1;

@@ -1,41 +1,29 @@
 #include <stdio.h>
 #include "core/structures.h"
 #include <stdlib.h>
-
-//find row//
-
-//find row BT
-
-//read full file//
+int mid;
 node* sortedArrayToBST(list order, int start, int end)
 {
-    int mid = 0;
+    
+    if(start>end){
+        return NULL;
+    }
     if((start + end-1)%2 == 0){
     mid = ((start + end-1)/2);
     }
     else{
         mid = ((start+end)/2);
     }
-    node *head = newnode(order[mid].id, order[mid].dish);
-    
+    node *head;
+    head->id = order[mid-1].id;
+    // printf(order);
+    head->dish = order[mid-1].dish;
     head->left =  sortedArrayToBST(order, start, mid-1);
     head->right = sortedArrayToBST(order, mid+1, end);
+    // printf("%i, %i", order[mid-1].id, order[mid-1].dish);
     return head;
 }
-int find_item_BT(string tablename_data, int id){
-    list order; 
-    char data[100];
-    FILE* ptr = fopen(tablename_data, "r");
-    int i;
-    fgets(data, 100, ptr);
-    for(i=0;i<5;i++){
-        fgets(data, 2, ptr);
-        order[i].id = atoi(data);
-        fgets(data, 2, ptr);
-        fgets(data, 100, ptr);
-        order[i].dish = atoi(data);
-    }
-    node *root = sortedArrayToBST(order, 0, 5);
+int search(node* root, int id){
     node *temp = root;
     while(temp->id != id){
         if(id < temp->id){
@@ -45,9 +33,26 @@ int find_item_BT(string tablename_data, int id){
             temp = temp->right;
         }
     }
-    return temp->id;
+    return temp->dish;
+}
+int find_item_BT(string tablename_data, int id){
+    list order; 
+    char data[100];
+    FILE* ptr = fopen(tablename_data, "r");
+    int i;
+    fgets(data, 100, ptr);
+    for(i=0;i<10;i++){
+        fgets(data, 2, ptr);
+        order[i].id = atoi(data);
+        fgets(data, 2, ptr);
+        fgets(data, 100, ptr);
+        order[i].dish = atoi(data);
+    }
+    printf("%i",order[id-1].dish);
+    node *root = sortedArrayToBST(order, 0, 10);
+    int dish = search(root, id);
     
-    
+    return dish;
 }
 string find_row(string tablename, int no){
     int i;
@@ -84,7 +89,6 @@ int find(int id, char*tablename){
     printf("no id found");
     return -2;
 }
-
 int read_full_file(string tablename){
     FILE *fp = fopen(tablename,"r");
     if (fp == NULL)

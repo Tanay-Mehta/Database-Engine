@@ -8,6 +8,6 @@ int main(void){
     // string temp_file = "../data/temp.txt";
     //goal = find dish id 7
 
-    int hello = find_item_BT(filepath_data, 2);
+    int hello = find_item_BT(filepath_data, 9);
     printf("%i", hello);
 }

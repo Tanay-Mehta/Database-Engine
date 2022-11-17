@@ -9,15 +9,12 @@ string stringify_date(struct date date1){
     snprintf(data_string, 50, "%d/%d/%d", date1.day, date1.month, date1.year);
     return data_string;
 }
-
 string stringify_order(order order){
     snprintf(order_string, 50, "%c,%s,%s", order.time, order.dish, order.date);
     return order_string;
 }
-
 int parse_date(string date2, struct date date1){
     char ch[50];
-    
     int i, j=0;
     for(i=0;i<10;i++){
         ch[j] = date2[i];
