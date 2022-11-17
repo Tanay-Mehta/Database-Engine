@@ -2,7 +2,13 @@
 
 #ifndef STRUCTURES_H
 #define STRUCTURES_H
-
+typedef struct node{
+    int id;
+    int dish;
+    struct node* left;
+    struct node* right;
+}node;
+node *newnode(int id1,int dish1);
 typedef char* string;
 string find_row(string tablename, int no);
 int find(int id, char*tablename);
@@ -21,20 +27,6 @@ typedef struct order{
     string dish;
     date date;
 }order;
-string stringify_date(struct date date1);
-string stringify_order(order order);
-int parse_date(string date2, struct date date1);
-int parse_order(string order2, struct order order1);
-//-----------------------------------------//
-
-typedef struct node{
-    int id;
-    int dish;
-    struct node* left;
-    struct node* right;
-}node;
-
-
 typedef struct ride{
     string to;
     string from;
@@ -47,4 +39,10 @@ typedef struct general{
     order order;
     ride ride;
 }general;
+string stringify_date(struct date date1);
+string stringify_order(order order);
+int parse_date(string date2, struct date date1);
+int parse_order(string order2, struct order order1);
+int find_item_BT(string tablename_data, int id);
+
 #endif
